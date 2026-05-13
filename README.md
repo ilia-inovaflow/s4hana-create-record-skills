@@ -1,6 +1,6 @@
 # s4hana-create-record-skills
 
-> **Agent skills for creating AND updating records in SAP S/4HANA Cloud Public and on-prem private editions** — supplier invoices, purchase orders, business partners (supplier/customer/combined), service entry sheets, purchasing info records, goods receipts, PO confirmations, plus generic create + update fallbacks.
+> **Agent skills for creating AND updating records in SAP S/4HANA Cloud Public and on-prem private editions** — products (materials), supplier invoices, purchase orders, business partners (supplier/customer/combined), service entry sheets, purchasing info records, goods receipts, PO confirmations, plus generic create + update fallbacks.
 
 Verified production-ready against SAP S/4HANA Cloud Public Edition and on-prem private edition. Works with Claude Code, Cursor, Codex, OpenCode, and any agent that supports the [open agent skills format](https://skills.sh).
 
@@ -35,7 +35,7 @@ The first time you invoke any skill, it **creates a `.env` template in your curr
 | **`cc`** | On-prem / Private Edition with OAuth 2.0 client credentials (technical user) | `SAP_TOKEN_URL` + `SAP_CLIENT_ID` + `SAP_CLIENT_SECRET` |
 | **`oauth`** | Cloud Public with a named-user bearer token (Auth Code + PKCE flow) — less common | Nothing long-lived in `.env`; supply token at runtime |
 
-For Cloud Public tenants, you also need Communication Arrangements added in Fiori for each scenario you'll use: `SAP_COM_0057` (invoices), `SAP_COM_0053` (POs), `SAP_COM_0008` (BPs), `SAP_COM_0146` (SES), `SAP_COM_0108` (GR), `SAP_COM_0827` (PO confirmations), `SAP_COM_0102` (PIRs).
+For Cloud Public tenants, you also need Communication Arrangements added in Fiori for each scenario you'll use: `SAP_COM_0009` (products), `SAP_COM_0057` (invoices), `SAP_COM_0053` (POs), `SAP_COM_0008` (BPs), `SAP_COM_0146` (SES), `SAP_COM_0108` (GR), `SAP_COM_0827` (PO confirmations), `SAP_COM_0102` (PIRs).
 
 **Never commit `.env`.** The skills add it to `.gitignore` automatically.
 
@@ -43,6 +43,7 @@ For Cloud Public tenants, you also need Communication Arrangements added in Fior
 
 | Skill | Endpoint |
 |---|---|
+| `s4hana-create-product` | OData V4 `api_product/srvd_a2x/sap/product/0002` deep-insert |
 | `s4hana-create-invoice` | SOAP A2X `SupplierInvoiceERPCreateRequest_sync` |
 | `s4hana-create-po` | OData V2 `A_PurchaseOrder` deep-insert (goods + service POs) |
 | `s4hana-create-business-partner` | OData V2 `A_BusinessPartner` deep-insert (supplier / customer / combined) |
