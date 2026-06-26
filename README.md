@@ -1,6 +1,6 @@
 # s4hana-create-record-skills
 
-> **Agent skills for creating AND updating records in SAP S/4HANA Cloud Public and on-prem private editions** — products (materials), supplier invoices, purchase orders, business partners (supplier/customer/combined), service entry sheets, purchasing info records, goods receipts, PO confirmations, plus generic create + update fallbacks.
+> **Agent skills for creating AND updating records in SAP S/4HANA Cloud Public and on-prem private editions** — products (materials), supplier invoices, purchase orders, business partners (supplier/customer/combined), service entry sheets, purchasing info records, goods receipts, PO confirmations, communication management / integration setup (comm users, systems, OAuth2 arrangements), plus generic create + update fallbacks.
 
 Verified production-ready against SAP S/4HANA Cloud Public Edition and on-prem private edition. Works with Claude Code, Cursor, Codex, OpenCode, and any agent that supports the [open agent skills format](https://skills.sh).
 
@@ -52,6 +52,7 @@ For Cloud Public tenants, you also need Communication Arrangements added in Fior
 | `s4hana-create-goods-receipt` | OData V2 `A_MaterialDocumentHeader` |
 | `s4hana-create-po-confirmation` | SOAP A2X `SupplierConfirmationRequest_In` (WS-Addressing) |
 | `s4hana-update-record` | OData V2 PATCH on any entity, with GET-PATCH-GET verify |
+| `s4hana-comm-management` | Communication Management (`SAP_COM_0A48`) OData V4 A2X — comm users, systems (OAuth2 + redirect URI) & arrangements; the admin layer that wires inbound API access. **Cloud Public only.** |
 | `s4hana-create-record` | Generic create fallback — researches `$metadata`, probes minimal payloads |
 
 Each skill handles CSRF tokens, master-data lookup, idempotent bulk batches, transient retry, and known SAP quirks per entity.
